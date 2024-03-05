@@ -23,7 +23,7 @@ class Login_View extends StatelessWidget {
           child: Column(
             children: [
               SizedBox(height: MediaQuery.of(context).size.height*0.12,),
-              SizedBox(height: 5,),
+              
               Flexible(child: FadeInUp(duration: Duration(milliseconds: 1200) , child: FittedBox(fit: BoxFit.fill, child: Image.asset('assets/images/logo.png',width: 231, height: 66, )))),
               SizedBox(height: MediaQuery.of(context).size.height*0.11,),
               FadeInUp(duration: Duration(milliseconds: 1600) ,child: Text('Welcome Back ' ,style: TextStyle(fontSize: 24 , fontWeight: FontWeight.bold) ,)),
