@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 
+// ignore: must_be_immutable
 class custom_button extends StatelessWidget {
   custom_button(
       {super.key, required this.color, required this.content, this.ontap});
