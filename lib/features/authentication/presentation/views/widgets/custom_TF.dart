@@ -8,10 +8,15 @@ class custom_TF extends StatelessWidget {
     required this.hint,
     super.key,
     this.maxLines,
-    this.controller
+    this.controller,
+    required this.password,
+    this.validator
+    
   });
   
   final hint;
+  bool password;
+  String? Function(String?)? validator;
   int? maxLines=1;
   TextEditingController? controller;
   @override
@@ -19,16 +24,10 @@ class custom_TF extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8 ),
       child: TextFormField(
+        obscureText: password,
+        
         controller: controller ,
-        validator: (value) {
-          if(value==null || value=='' ) {
-            return 'void informations';
-          }
-          if( !value.startsWith('+213') && !value.startsWith('0')  ) {
-            return 'numéro inccorect' ;
-          }
-          return null;
-        },
+        validator: validator,
         maxLines: maxLines,
         
         decoration: InputDecoration(
