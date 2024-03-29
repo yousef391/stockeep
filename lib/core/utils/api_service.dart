@@ -17,7 +17,6 @@ final Dio dio ;
 
   Future<Response> postservice(String endpoint , Map data ) async {
     var response = await dio.post('$_baseURl$endpoint' , data: data  );
-    print(response.statusCode);
       return response;
   }
    

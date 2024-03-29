@@ -1,15 +1,18 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:quickalert/models/quickalert_type.dart';
 import 'package:quickalert/widgets/quickalert_dialog.dart';
-import 'package:stockeep/features/authentication/presentation/cubit/cubit/auth_cubit.dart';
-import 'package:stockeep/features/authentication/presentation/views/widgets/custom_TF.dart';
-import 'package:stockeep/features/authentication/presentation/views/widgets/custom_button.dart';
+import 'package:stockeep/presentation/cubit/cubit/auth_cubit.dart';
+import 'package:stockeep/presentation/views/widgets/custom_TF.dart';
+import 'package:stockeep/presentation/views/widgets/custom_button.dart';
 
+
+// ignore: must_be_immutable
 class Login_View extends StatelessWidget {
   Login_View({super.key});
 
@@ -72,20 +75,22 @@ class Login_View extends StatelessWidget {
                   child: Column(
                     children: [
                       SizedBox(
-                        height: MediaQuery.of(context).size.height * 0.12,
+                        height: MediaQuery.of(context).size.height * 0.08,
                       ),
                       Flexible(
-                          child: FadeInUp(
-                              duration: Duration(milliseconds: 1200),
-                              child: FittedBox(
-                                  fit: BoxFit.fill,
-                                  child: Image.asset(
-                                    'assets/images/logo.png',
-                                    width: 231,
-                                    height: 66,
-                                  )))),
+                        child: FadeInUp(
+                            duration: Duration(milliseconds: 1200),
+                            child: FittedBox(
+                                fit: BoxFit.fill,
+                                child: Image.asset(
+                                  'assets/images/logo.png',
+                                  
+                              
+                                  
+                                ))),
+                      ),
                       SizedBox(
-                        height: MediaQuery.of(context).size.height * 0.11,
+                        height: MediaQuery.of(context).size.height * 0.08,
                       ),
                       FadeInDown(
                           duration: Duration(milliseconds: 1600),
@@ -164,7 +169,7 @@ class Login_View extends StatelessWidget {
                                   fontWeight: FontWeight.bold,
                                   color: Colors.white))),
                       SizedBox(
-                        height: MediaQuery.of(context).size.height * 0.17,
+                        height: MediaQuery.of(context).size.height * 0.08,
                       )
                     ],
                   ),
