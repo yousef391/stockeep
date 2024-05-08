@@ -1,16 +1,19 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:email_validator/email_validator.dart';
+
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:quickalert/models/quickalert_type.dart';
 import 'package:quickalert/widgets/quickalert_dialog.dart';
+import 'package:stockeep/core/utils/Gotouter.dart';
 import 'package:stockeep/presentation/cubit/cubit/auth_cubit.dart';
+
 import 'package:stockeep/presentation/views/widgets/custom_TF.dart';
 import 'package:stockeep/presentation/views/widgets/custom_button.dart';
-
 
 // ignore: must_be_immutable
 class Login_View extends StatelessWidget {
@@ -27,9 +30,8 @@ class Login_View extends StatelessWidget {
       body: BlocConsumer<AuthCubit, AuthState>(
         listener: (context, state) {
           if (state is AuthLoginSuccess) {
-            print(state.user.token);
-            print("success");
             loading = false;
+            GoRouter.of(context).push(routerapp.HomePath);
           }
           if (state is AuthLoginloading) {
             loading = true;
@@ -37,14 +39,12 @@ class Login_View extends StatelessWidget {
           if (state is AuthLoginFailure) {
             loading = false;
             QuickAlert.show(
-  context: context,
-  type: QuickAlertType.error, 
-  title: state.message,
-  confirmBtnText: 'Ok',
-  confirmBtnColor: Color(0xff2185D5),
-  borderRadius: 8
-
-);
+                context: context,
+                type: QuickAlertType.error,
+                title: state.message,
+                confirmBtnText: 'Ok',
+                confirmBtnColor: Color(0xff2185D5),
+                borderRadius: 8);
           }
         },
         builder: (context, state) {
@@ -77,24 +77,19 @@ class Login_View extends StatelessWidget {
                       SizedBox(
                         height: MediaQuery.of(context).size.height * 0.08,
                       ),
-                      Flexible(
-                        child: FadeInUp(
-                            duration: Duration(milliseconds: 1200),
-                            child: FittedBox(
-                                fit: BoxFit.fill,
-                                child: Image.asset(
-                                  'assets/images/logo.png',
-                                  
-                              
-                                  
-                                ))),
+                      FadeInDown(
+                        duration: Duration(milliseconds: 1400),
+                        child: Image.asset(
+                          fit: BoxFit.fill ,
+                          'assets/images/logo.png',
+                        ),
                       ),
                       SizedBox(
                         height: MediaQuery.of(context).size.height * 0.08,
                       ),
                       FadeInDown(
                           duration: Duration(milliseconds: 1600),
-                          child: Text(
+                          child: const  Text(
                             'Welcome Back ',
                             style: TextStyle(
                                 fontSize: 24, fontWeight: FontWeight.bold),
@@ -120,7 +115,7 @@ class Login_View extends StatelessWidget {
                           if (value == null || value == '') {
                             return 'void informations';
                           }
-                          if (!EmailValidator.validate(value) ) {
+                          if (!EmailValidator.validate(value) || !value.contains('esi-sba.dz') ) {
                             return 'Please enter a valid email';
                           }
                           return null;
@@ -147,10 +142,7 @@ class Login_View extends StatelessWidget {
                       SizedBox(
                         height: MediaQuery.of(context).size.height * 0.02,
                       ),
-                      const Text('Forget Password ?',
-                          textAlign: TextAlign.right,
-                          style: TextStyle(
-                              color: Color(0xff888888), fontSize: 14)),
+                      
                       SizedBox(
                         height: MediaQuery.of(context).size.height * 0.05,
                       ),

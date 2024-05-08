@@ -1,15 +1,20 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:go_router/go_router.dart';
+import 'package:iconly/iconly.dart';
+import 'package:stockeep/core/utils/Gotouter.dart';
+import 'package:stockeep/presentation/cubit/cubit/auth_cubit.dart';
+import 'package:stockeep/presentation/views/Cardview.dart';
+import 'package:stockeep/presentation/views/Oderview.dart';
+import 'package:stockeep/presentation/views/widgets/Customuserinfotail.dart';
 
-import 'package:stockeep/presentation/views/widgets/Product_item.dart';
-import 'package:stockeep/presentation/views/widgets/custom_dropdownbutton.dart';
-import 'package:stockeep/presentation/views/widgets/custom_searchbar.dart';
+import 'package:stockeep/presentation/views/widgets/Home_body.dart';
+
 import 'package:stockeep/presentation/views/widgets/custombuttombar.dart';
-
-import 'widgets/custom_appbar.dart';
 
 class Home_view extends StatefulWidget {
   Home_view({super.key});
@@ -19,108 +24,85 @@ class Home_view extends StatefulWidget {
 }
 
 class _Home_viewState extends State<Home_view> {
-  List<String>? items = ['yousef', 'islem', 'achraf'];
-
-  List<String?> selectedvalue = [];
-  List<String?> selectedvalue2 = [];
   int selectedIndex = 0;
-
+  PageController controller=PageController();
+bool dark=false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.white,
+    drawer : Drawer(
+      clipBehavior: Clip.antiAlias,
+      
+      width: MediaQuery.of(context).size.width*0.8,
+      child: Column(children: [
+       const SizedBox(height: 15,),
+        customuserinfotail(img: BlocProvider.of<AuthCubit>(context).user!.image, subtitle: BlocProvider.of<AuthCubit>(context).user!.email , title: '${BlocProvider.of<AuthCubit>(context).user!.first_name} ${BlocProvider.of<AuthCubit>(context).user!.last_name} ' ),
+      const   SizedBox(height: 40,) ,
+      const  ListTile(title: Text('Home'), leading: Icon(IconlyLight.home , size: 21,),),
+      GestureDetector(child:   ListTile(title: Text('Settings'), leading: Icon(IconlyLight.setting , size: 21,),) , onTap: () => GoRouter.of(context).push(routerapp.KSettings) ,),
+      GestureDetector(child: const  ListTile(title: Text('Contact us'), leading: Icon(IconlyLight.call , size: 21,),)),
+      const  Expanded(child: SizedBox(),) ,
+       Switch(
+      // This bool value toggles the switch.
+      value: !dark,
+      thumbIcon: dark ? MaterialStatePropertyAll<Icon>(Icon(FontAwesomeIcons.sun ,color: Colors.yellow,) )  :MaterialStatePropertyAll<Icon>(Icon(FontAwesomeIcons.moon ,color: Colors.blue[900],) ) ,
+      
+      trackColor:!dark ? MaterialStatePropertyAll<Color>(Colors.black) :  MaterialStatePropertyAll<Color>(Colors.yellow)  ,
+      thumbColor: const MaterialStatePropertyAll<Color>(Colors.white),
+      onChanged: (bool value) {
+        // This is called when the user toggles the switch.
+        setState(() {
+          dark= !dark;
+        });
+      },
+    ),
+       SizedBox(height: 50,)
+
+      ])),
+        appBar: AppBar(
+          
+          surfaceTintColor: Colors.white,
+          shadowColor: Colors.black,
+         
+          
+          title: Image.asset(
+                      'assets/images/logo.png',
+                      width: 119,
+                      height: 35,
+                    ),
+          centerTitle: true,
+          actions: [
+            IconButton(
+                onPressed: () {},
+                icon: Icon(
+                  FontAwesomeIcons.bell,
+                  size: 22,
+                ))
+          ],
+        ),
+       
         body: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 10),
           child: Stack(
             children: [
-              Positioned.fill(
-                child: CustomScrollView(
-                  slivers: [
-                    SliverToBoxAdapter(
-                      child: SafeArea(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            const custom_appBar(),
-                            const Padding(
-                              padding: EdgeInsets.symmetric(vertical: 12),
-                              child: custom_searchbar(),
-                            ),
-                            Text(
-                              'Filtres',
-                              style:
-                                  GoogleFonts.poppins().copyWith(fontSize: 18),
-                              textAlign: TextAlign.start,
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.symmetric(vertical: 12),
-                              child: Row(
-                                children: [
-                                  Expanded(
-                                    child: custom_dropdownbutton(
-                                      hint: 'Chapter..',
-                                      items: items!,
-                                      onchange: (value) {
-                                        setState(() {
-                                          selectedvalue = value;
-                                        });
-                                      },
-                                      selectedvalue: selectedvalue,
-                                      icon: FontAwesomeIcons.chartBar,
-                                    ),
-                                  ),
-                                  const SizedBox(
-                                    width: 10,
-                                  ),
-                                  Expanded(
-                                    child: custom_dropdownbutton(
-                                      hint: 'Article..',
-                                      items: items!,
-                                      onchange: (value) {
-                                        setState(() {
-                                          selectedvalue2 = value;
-                                        });
-                                      },
-                                      selectedvalue: selectedvalue,
-                                      icon: FontAwesomeIcons.noteSticky,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            Text(
-                              'Products',
-                              style:
-                                  GoogleFonts.poppins().copyWith(fontSize: 18),
-                              textAlign: TextAlign.start,
-                            ),
-                            SizedBox(
-                              height: 10,
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                    SliverGrid.builder(
-                      gridDelegate:
-                          const SliverGridDelegateWithFixedCrossAxisCount(
-                              crossAxisCount: 2,
-                              crossAxisSpacing: 8,
-                              mainAxisSpacing: 5,
-                              childAspectRatio: 0.92),
-                      itemCount: 8,
-                      itemBuilder: (BuildContext context, int index) {
-                        // Your grid item builder function
-                        return productitem();
-                      },
-                    )
-                  ],
-                ),
-              ),
+              PageView(
+                physics: NeverScrollableScrollPhysics(),
+                controller: controller,
+                children: [
+                 Home_body(),
+                 Home_body(),
+                  CardView(),
+                  OrderView()
+              
+                ],
+              ) ,
+
               custombottombar(
                 onselect: (int index) {
                   setState(() {
+                    
                     selectedIndex = index;
+                    controller.jumpToPage(index);
                   });
                 },
                 selectedIndex: selectedIndex,
@@ -130,3 +112,13 @@ class _Home_viewState extends State<Home_view> {
         ));
   }
 }
+
+
+
+
+
+
+
+
+
+

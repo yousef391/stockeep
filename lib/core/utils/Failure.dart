@@ -44,7 +44,6 @@ return servicefailure(response.data['message']);
 return servicefailure('internet server error');
   } else {
     return servicefailure('oops there was an error , try later!');
-  }
-  
+  } 
 }
 }

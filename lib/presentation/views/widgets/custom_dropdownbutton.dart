@@ -12,12 +12,13 @@ import 'package:stockeep/const.dart';
 
 // ignore: must_be_immutable
 class custom_dropdownbutton extends StatefulWidget {
- custom_dropdownbutton({super.key ,required this.items  , required this.onchange , required this.selectedvalue, required this.icon , required this.hint});
+ custom_dropdownbutton({ super.key , this.onchange,required this.items  , required this.selectedvalue, required this.icon , required this.hint});
 List<String> items;
-var onchange ;
+
 IconData icon;
 List<String?> selectedvalue;
 String hint;
+void Function()? onchange;
 
   @override
   State<custom_dropdownbutton> createState() => _custom_dropdownbuttonState();
@@ -56,8 +57,10 @@ items: widget.items.map((item) {
                   final isSelected = widget.selectedvalue.contains(item);
                   return InkWell(
                     onTap: () {
+                      
                       isSelected ? widget.selectedvalue.remove(item) : widget.selectedvalue.add(item);
                       //This rebuilds the StatefulWidget to update the button's text
+                      widget.onchange!();
                       setState(() {});
                       //This rebuilds the dropdownMenu Widget to update the check mark
                       menuSetState(() {});
