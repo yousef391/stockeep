@@ -18,4 +18,20 @@ class GetBcisCubit extends Cubit<GetBcisState> {
       emit(GEtBcisSucces(r));
     });
   }
+
+  
+
+    Future<void> deletedata(BCi bci ,String token, String consid) async {
+    
+    emit(Deletebciloading());
+    
+    var result = await homerepoimpl.deleteBci(bci , token);
+   emit(Deletebciloading());
+   if (result != null) {
+    emit(Deletebcifailure());
+   } else {
+    getdata(token, consid);
+   }
+
+  }
 }

@@ -1,6 +1,7 @@
 
 
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 // ignore: must_be_immutable
 class custom_TF extends StatelessWidget {
@@ -32,7 +33,7 @@ class custom_TF extends StatelessWidget {
         
         decoration: InputDecoration(
             fillColor: const Color(0xff2185D5).withOpacity(0.1),
-            hintStyle: const  TextStyle(color: Color(0xff2185D5), fontSize: 13 ,),
+            hintStyle:   GoogleFonts.poppins().copyWith(color: Color(0xff2185D5), fontSize: 13 ,),
             filled: true,
             
             hintText: hint,

@@ -13,3 +13,12 @@ final class GEtBcisfailure extends GetBcisState{
    final String message;
  GEtBcisfailure(this.message);
 }
+
+
+
+
+
+final class Deletebciloading extends GetBcisState{}
+final class Deletebcifailure extends GetBcisState{
+
+}

@@ -22,7 +22,7 @@ class BCi {
    },);
    
   
-return BCi(consomid: json['Consommateur_id'], date: json['date'], id: json['id'], status: json['status'], type: json['type'] , items: itemss );
+return BCi(consomid: json['user_id'], date: json['date'], id: json['id'], status: json['status'], type: json['type'] , items: itemss );
   }
 
 
@@ -35,7 +35,7 @@ return BCi(consomid: json['Consommateur_id'], date: json['date'], id: json['id']
     });
     return
     {
-    "Consommateur_id": consomid,
+    "user_id": consomid,
     "status" : status.toString(),
     "type" : type.toString(),
     "date" : date.toString() ,

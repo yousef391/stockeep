@@ -12,10 +12,26 @@ class AddbciCubit extends Cubit<AddbciState> {
   Future<void> postdata(BCi bci) async {
     
     emit(Addbciloading());
-    var result = await homerepoimpl.PostBci(bci);
+    
+    var result = await homerepoimpl.postBci(bci);
+    
     result.fold((l) => emit(Addbcifailure(l.message)), (r) {
     
       emit(AddbciSucces());
     });
   }
+
+    Future<void> getbci(String token, int bciid) async {
+    emit(GEtBciloading());
+    var result = await homerepoimpl.getBci(token, bciid );
+    result.fold((l) => emit(
+      GEtBcifailure(l.message)), (r) {
+        
+    print(r);
+      emit(GEtBciSucces(r));
+    });
+  }
+
+
+  
 }

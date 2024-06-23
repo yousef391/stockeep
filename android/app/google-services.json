@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1054781568613",
+    "project_id": "notifi-9e49f",
+    "storage_bucket": "notifi-9e49f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1054781568613:android:ba19e360929325a272b88c",
+        "android_client_info": {
+          "package_name": "com.example.stockeep"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCWxxeQMAr7EJALrY3qRQGPfnkZRLxBAkQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

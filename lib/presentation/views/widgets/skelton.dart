@@ -88,7 +88,7 @@ SizedBox(height: 20,),
                               ),
                               itemCount: 6,
                               itemBuilder: (BuildContext context, int index) {
-                                return Container(height:90 , color:  Colors.grey,) ;
+                                return Container(height:90 , decoration: BoxDecoration(borderRadius: BorderRadius.circular(16) ,color:  Colors.grey,),) ;
                               },
                             ),
                           ],

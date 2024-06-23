@@ -8,6 +8,7 @@ import 'package:stockeep/const.dart';
 import 'package:stockeep/data/models/Product.dart';
 import 'package:stockeep/presentation/cubit/cubit/addproduct_cubit.dart';
 
+// ignore: must_be_immutable
 class carditem extends StatelessWidget {
    carditem({
     super.key,
@@ -22,17 +23,49 @@ Product product;
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 5),
       child: Slidable(
-        
         endActionPane:  ActionPane(
       motion: const StretchMotion(),
       children: [
         SlidableAction(
           backgroundColor: Color(0xFFFF7D7D),
-          borderRadius:  BorderRadius.only(bottomRight: Radius.circular(18) , topRight: Radius.circular(18)  ) ,
+          borderRadius:  BorderRadius.only(bottomRight: Radius.circular(18) , topRight: Radius.circular(8)  ) ,
           icon: IconlyLight.delete,
           label: 'Delete', onPressed: (BuildContext context) { 
-            product.qnt=0;
-            BlocProvider.of<AddproductCubit>(context).removeallproducts(product);
+           
+showDialog(
+    context: context,
+    barrierDismissible: false, // user must tap button!
+    builder: (BuildContext innercontext) {
+      return BlocProvider.value(
+        value: context.watch<AddproductCubit>(),
+        child: BlocBuilder<AddproductCubit, AddproductState>(
+          builder: (context, state) {
+            return AlertDialog(
+              title: const Text('Warning !'),
+              content: const SingleChildScrollView(
+                child: ListBody(
+                  children: <Widget>[
+                    Text('Are you sure you want to delete this item? This action cannot be undone ' ,style:TextStyle( fontSize: 12),)
+                  ],
+                ),
+              ),
+              actions: <Widget>[
+                  TextButton(onPressed: () { 
+                  Navigator.of(context).pop();
+                }, child: Text('Cancel' , style: TextStyle(color:Colors.red , fontWeight: FontWeight.bold)),),
+               TextButton(onPressed: () { 
+                  context.read<AddproductCubit>().removeallproducts(product);
+                  Navigator.of(context).pop();
+                }, child: Text('Confirm'),)
+                
+              ],
+            );
+          },
+        )
+      );
+    },
+  );
+
              },
         ),
        

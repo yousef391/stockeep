@@ -34,6 +34,7 @@ class _Home_bodyState extends State<Home_body> {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<GetchapitreCubit, GetchapitreState>(
+  
       listener: (context, state) {
         if (state is GetchapitreFailure) {
           QuickAlert.show(
@@ -188,7 +189,9 @@ class _Home_bodyState extends State<Home_body> {
                               ),
                               itemCount: 6,
                               itemBuilder: (BuildContext context, int index) {
-                                return Container(height:90 , color:  Colors.grey,) ;
+                                return Container(
+                                  decoration: BoxDecoration(borderRadius: BorderRadius.circular(16) , color:  Colors.grey,),
+                                  height:90 ) ;
                               },
                             ),
                       );

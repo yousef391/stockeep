@@ -9,6 +9,6 @@ final class Addingstate extends AddproductState {
 
 }
 final class removingstate extends AddproductState {
-
-
+}
+final class voidcardstate extends AddproductState {
 }

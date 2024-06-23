@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:stockeep/presentation/cubit/cubit/get_bcis_cubit.dart';
 import 'package:stockeep/presentation/views/widgets/Cardshimmer.dart';
 
+
 import 'package:stockeep/presentation/views/widgets/Order_item.dart';
 
 class OrderView extends StatefulWidget {
@@ -21,9 +22,12 @@ class _OrderViewState extends State<OrderView> {
   Widget build(BuildContext context) {
     return CustomScrollView(
       slivers: <Widget>[
-        BlocBuilder<GetBcisCubit, GetBcisState>(
+        BlocConsumer<GetBcisCubit, GetBcisState>(
+          listener: (BuildContext context, GetBcisState state) {  },
           builder: (context, state) {
+            
             if (state is GEtBcisSucces) {
+             
   return SliverList.builder(
       itemCount: state.bcis.length,
       itemBuilder: (context, int index) {
@@ -36,7 +40,7 @@ class _OrderViewState extends State<OrderView> {
         return Cardshimmer();
       });
           }
-          } 
+          },  
           
         ),
         SliverToBoxAdapter(

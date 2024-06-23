@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:iconly/iconly.dart';
+import 'package:stockeep/core/utils/Gotouter.dart';
 import 'package:stockeep/presentation/cubit/cubit/auth_cubit.dart';
 import 'package:stockeep/presentation/views/widgets/Customuserinfotail.dart';
 
@@ -11,8 +13,9 @@ class Settings extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+    
       appBar: AppBar(
-        leading: Icon(Icons.arrow_back),
+        leading: IconButton(onPressed: () =>Navigator.of(context).pop() , icon: Icon(Icons.arrow_back)),
         centerTitle: true,
         title: Text("Setting" , style: GoogleFonts.poppins().copyWith(fontSize: 24 , fontWeight: FontWeight.bold ) ,),
       ),
@@ -22,9 +25,13 @@ class Settings extends StatelessWidget {
           SizedBox(height: 30,),
            
          
-                        ListTile(title: Text('Account' , style: TextStyle(fontWeight: FontWeight.bold),), leading: Icon(IconlyBold.user_2, size: 28,),subtitle: Text('Privacy, secutrity, change email or number'),),
+                        GestureDetector(
+                          onTap: () => GoRouter.of(context).push(routerapp.Kchangepass) ,
+                          child: ListTile(title: Text('Account' , style: TextStyle(fontWeight: FontWeight.bold),), leading: Icon(IconlyBold.user_2, size: 28,),subtitle: Text('Privacy, secutrity, change password'),)),
             SizedBox(height: 15,),
-                        ListTile(title: Text('Notifications' , style: TextStyle(fontWeight: FontWeight.bold),), leading: Icon(IconlyBold.notification , size: 28,), subtitle: Text('Message, group & call tones'),),
+                        GestureDetector(
+                          onTap: () => GoRouter.of(context).push(routerapp.Knotif),
+                          child: ListTile(title: Text('Notifications' , style: TextStyle(fontWeight: FontWeight.bold),), leading: Icon(IconlyBold.notification , size: 28,), subtitle: Text('Message, group & call tones'),)),
             SizedBox(height: 15,),
                         ListTile(title: Text('Help' , style: TextStyle(fontWeight: FontWeight.bold),), leading: Icon(IconlyBold.call , size: 28,), subtitle:Text('Help cenre, contact us, privacy policy') ,),
             SizedBox(height: 15,)

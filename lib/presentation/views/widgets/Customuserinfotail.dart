@@ -30,8 +30,8 @@ String img;
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(100),
         ),
-        child: Image.network(
-          img,
+        child: Image.asset(
+          'assets/images/m.jpg',
           fit: BoxFit.fill,
         ),
       ),
